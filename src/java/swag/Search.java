@@ -53,7 +53,12 @@ public class Search extends HttpServlet {
         
         
         HttpSession session = request.getSession();
-        
+        String logged = (String)session.getAttribute("logged");
+        int user1 = 0;
+        if(logged == null)
+            logged = "false";
+        else
+            user1 = (Integer)session.getAttribute("id");
             
         // obtain the values of the form data automatically URL decoded
         String name = request.getParameter("name");
@@ -100,7 +105,24 @@ public class Search extends HttpServlet {
                 int result_age = rs.getInt("age");
                 String result_sex = rs.getString("sex");
                 int result_id = rs.getInt("account_id");
-                profiles.add(new Profile(result_name, result_age, result_sex, result_id));
+                if(!logged.equals("true"))
+                    profiles.add(new Profile(result_name, result_age, result_sex, result_id));
+                else {
+                     try {
+                        Statement stmt2 = conn.createStatement();
+                        sql = "SELECT * FROM swipe WHERE user1_id = " + user1 + " AND user2_id = " +  result_id;
+                        ResultSet rs2 = stmt2.executeQuery(sql);
+                        if(rs2.next())
+                        {
+                            results--;
+                        } else {
+                            profiles.add(new Profile(result_name, result_age, result_sex, result_id));
+                        }
+                    } catch (Exception e) {
+                        message = e.getMessage();
+                        e.printStackTrace(pw);
+                    }
+                }
             }
         } catch (Exception e) {
             //message = e.getMessage();

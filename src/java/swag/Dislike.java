@@ -11,20 +11,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Iterator;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import tinder.Profile;
 
 /**
  *
  * @author Shannon
  */
-public class Like extends HttpServlet {
+public class Dislike extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -56,7 +53,6 @@ public class Like extends HttpServlet {
         }
         
         // obtain the values of the form data automatically URL decoded
-        
         int user2 = Integer.parseInt(request.getParameter("id"));
         int user1 = (Integer)session.getAttribute("id");
         
@@ -75,6 +71,7 @@ public class Like extends HttpServlet {
               message = e.getMessage();
           }
         ResultSet rs;
+        
         boolean insert = true;
         try {
             Statement stmt = conn.createStatement();
@@ -97,9 +94,9 @@ public class Like extends HttpServlet {
             Statement stmt = conn.createStatement();
             if(insert)
                 sql = "INSERT INTO swipe (user1_id, user2_id, liked)" 
-                   + " VALUES (" + user1 + ", " + user2 + ", " + 1 + ")";
+                   + " VALUES (" + user1 + ", " + user2 + ", " + 0 + ")";
             else
-                sql = "Update swipe SET liked = 1 WHERE user1_id =" + user1 + " AND user2_id = " + user2;
+                sql = "Update swipe SET liked = 0 WHERE user1_id =" + user1 + " AND user2_id = " + user2;
             stmt.executeUpdate(sql);
         } catch (Exception e) {
             message = e.getMessage();

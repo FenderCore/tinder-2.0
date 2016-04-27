@@ -63,7 +63,7 @@ public class LoginProcessor extends HttpServlet {
         
         try {
             Statement stmt = conn.createStatement();
-            sql = "SELECT * FROM account WHERE username = '" + username + "'";
+            sql = "SELECT * FROM account WHERE LOWER(username) = LOWER('" + username + "')";
             rs = stmt.executeQuery(sql);
             if(rs.next())
             {
@@ -73,8 +73,8 @@ public class LoginProcessor extends HttpServlet {
                     success = true;
                     message = "Successfully logged in";
                     session.setAttribute("logged", "true");
-                    session.setAttribute("username", username);
-                    session.setAttribute("id", rs.getInt(0));
+                    session.setAttribute("username", rs.getString("username"));
+                    session.setAttribute("id", rs.getInt("account_id"));
                 } else {
                     message = "Incorrect Password";
                 }

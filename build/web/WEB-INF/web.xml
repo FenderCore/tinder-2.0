@@ -32,6 +32,10 @@
         <servlet-name>Like</servlet-name>
         <servlet-class>swag.Like</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Dislike</servlet-name>
+        <servlet-class>swag.Dislike</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FormProcessor</servlet-name>
         <url-pattern>/FormProcessor</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>Like</servlet-name>
         <url-pattern>/Like</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Dislike</servlet-name>
+        <url-pattern>/Dislike</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

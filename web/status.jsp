@@ -15,6 +15,7 @@
     if(logged.equals("true"))
     {
         username = (String)request.getSession().getAttribute( "username" );
+        Integer id = (Integer)request.getSession().getAttribute( "id" );
         out.print("Welcome <a style='color:blue' href='account.jsp'>" + username + "</a> <a style='color:blue' href='Logout'>Logout</a>");
     } else {
         out.print("<a style='color:blue' href='login.jsp'>Login</a> <a style='color:blue' href='register.jsp'>Register</a>");
