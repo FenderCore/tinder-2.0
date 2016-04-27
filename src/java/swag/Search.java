@@ -97,6 +97,7 @@ public class Search extends HttpServlet {
             sql = "SELECT * FROM account WHERE full_name like '%" + name + "%' AND age between " + age1 + " AND " + age2;
             if(!sex.equals("Both"))
                 sql += " AND sex like '" + sex +"'";
+            sql += " ORDER BY full_name";
             rs = stmt.executeQuery(sql);
             while(rs.next())
             {
@@ -171,16 +172,16 @@ public class Search extends HttpServlet {
                 profile3 = iter.next();
             
             pw.println("<tr align='center'>");
-            pw.println("<td><img align='bottom' src='images/" + profile1.getSex() + ".jpg' width=200><br>");
+            pw.println("<td><img align='bottom' src='images/" + profile1.getSex() + (profile1.getAge() % 10) + ".jpg' width=200><br>");
             pw.println(profile1.getName() + ", " + profile1.getAge()+ "</td><td></td>");
             if(profile2 != null)
             {
-                pw.println("<td><img align='bottom' src='images/" + profile2.getSex() + ".jpg' width=200><br>");
+                pw.println("<td><img align='bottom' src='images/" + profile2.getSex() + (profile2.getAge() % 10) + ".jpg' width=200><br>");
                 pw.println(profile2.getName() + ", " + profile2.getAge()+ "</td><td></td>");
             }
             if(profile3 != null)
             {
-                pw.println("<td><img align='bottom' src='images/" + profile3.getSex() + ".jpg' width=200><br>");
+                pw.println("<td><img align='bottom' src='images/" + profile3.getSex() + (profile3.getAge() % 10) + ".jpg' width=200><br>");
                 pw.println(profile3.getName() + ", " + profile3.getAge()+ "</td>");
             }
             pw.println("</tr>");
