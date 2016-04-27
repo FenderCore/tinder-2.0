@@ -25,7 +25,7 @@
                 Name: <input type="text" name="name"/> <br>
                 Age <input type="number" name="age" min="18" max="125"/> <br>
                 Sex <select name="sex"><option>Male</option><option>Female</option></select> <br>
-                <input type="submit" />
+                <input type="submit" value="Register"/>
             </form>
         </div>
     </body>

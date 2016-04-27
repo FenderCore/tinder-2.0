@@ -11,17 +11,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import tinder.Profile;
 
 /**
  *
  * @author Shannon
  */
-public class LoginProcessor extends HttpServlet {
+public class Like extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,24 +35,35 @@ public class LoginProcessor extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   private final char QUOTE = '"';
+ private final char QUOTE = '"';
    
     Connection conn;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {  
-        HttpSession session = request.getSession(true);
+        
+        
+        HttpSession session = request.getSession();
+        
+        
+        String logged = (String)session.getAttribute("logged");
+        if(logged == null)
+            logged = "false";
+        if(!logged.equals("true"))
+        {
+            response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", "login.jsp?"); 
+        }
+        
         // obtain the values of the form data automatically URL decoded
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
+        String user2 = request.getParameter("id");
+        String user1 = (String)session.getAttribute("id");
+        
         String url= "jdbc:mysql://localhost:3306/tinder";
         String usernameDB = "root";
         String passwordDB = "";
-        
         String message = "";
         String sql = "";
-        boolean success = false;
         
         PrintWriter pw = response.getWriter();
         try {
@@ -63,24 +77,9 @@ public class LoginProcessor extends HttpServlet {
         
         try {
             Statement stmt = conn.createStatement();
-            sql = "SELECT * FROM account WHERE username = '" + username + "'";
-            rs = stmt.executeQuery(sql);
-            if(rs.next())
-            {
-                String pass = rs.getString("password");
-                if(pass.equals(password))
-                {
-                    success = true;
-                    message = "Successfully logged in";
-                    session.setAttribute("logged", "true");
-                    session.setAttribute("username", username);
-                    session.setAttribute("id", rs.getInt(0));
-                } else {
-                    message = "Incorrect Password";
-                }
-            } else {
-                message = "Username does not exist";
-            }
+            sql = "INSERT INTO swipe (user1, user2, liked)" 
+               + " VALUES ('" + user1 + "', '" + user2 + "', '" + 1 + "')";
+            stmt.executeUpdate(sql);
         } catch (Exception e) {
             //message = e.getMessage();
             //e.printStackTrace(pw);
@@ -100,10 +99,12 @@ public class LoginProcessor extends HttpServlet {
         //"<jsp:include page='/status.jsp' />" 
         request.getRequestDispatcher("/navigation.html").include(request, response);
         request.getRequestDispatcher("/status.jsp").include(request, response);
-        pw.println("<div id='main'>" +
-        "<P>"+ message + "</p>" +
-        "</div>" +
-        "</BODY>\n</HTML>\n");
+        pw.println("<div id='main'>" );
+        pw.print("Profile liked!");
+        
+        pw.println(
+            "</div>" +
+            "</BODY>\n</HTML>\n");
       pw.close();
    }
    

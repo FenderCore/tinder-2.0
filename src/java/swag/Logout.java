@@ -43,6 +43,7 @@ public class Logout extends HttpServlet {
         PrintWriter pw = response.getWriter();
         session.setAttribute("logged", "false");
         session.setAttribute("username", "");
+        session.setAttribute("id", "");
         String message = "You have successfully logged out!";
         
       // set response headers before returning any message content

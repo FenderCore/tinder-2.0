@@ -24,6 +24,14 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>swag.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>swag.Search</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Like</servlet-name>
+        <servlet-class>swag.Like</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FormProcessor</servlet-name>
         <url-pattern>/FormProcessor</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Like</servlet-name>
+        <url-pattern>/Like</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

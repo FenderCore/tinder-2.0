@@ -24,6 +24,7 @@
                 Password: <input type="password" name="password" /> <br>
                 <input type="submit" />
             </form>
+            Not registered? Click <a href="/register.jsp">here</a>
         </div>
     </body>
 </html>

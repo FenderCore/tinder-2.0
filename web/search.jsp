@@ -19,7 +19,12 @@
         <jsp:include page="navigation.html" />
         <jsp:include page="status.jsp" />
         <div id="main">
-            Welcome to Tinder 2.0
+            <form action="Search" method="get">
+                Name: <input type="text" name="name"/> <br>
+                Age from:<input type="number" name="age1" min="18" max="125" value="18"/> to <input type="number" name="age2" min="18" max="125" value="35"/><br>
+                Sex <select name="sex"><option>Male</option><option>Female</option><option>Both</option></select> <br>
+                <input type="submit"  value="Search"/>
+            </form>
         </div>
     </body>
 </html>
