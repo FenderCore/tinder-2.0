@@ -79,9 +79,9 @@ public class Messages extends HttpServlet {
         request.getRequestDispatcher("/navigation.html").include(request, response);
         request.getRequestDispatcher("/status.jsp").include(request, response);
         pw.println("<div id='main'>" );
-        pw.print("<div style='margin:25px'>Send a new message: <form style='margin: 15px; display:inline' action='SendMessage' method='post'><select name='contact'>");
-        for(String contact : contacts)
-            pw.print("<option>" + contact + "</option>");
+        pw.print("<div style='margin:25px'>Send a new message: <form style='margin: 15px; display:inline' action='Message' method='get'><select name='id'>");
+        for(int i = 0; i < contacts.size(); i+= 2)
+            pw.print("<option value=" + contacts.get(i+1) + ">" + contacts.get(i) + "</option>");
         pw.print("</select><input type='submit' value='Message' /></form> <br><br>");
         if(messages.size() == 0)
             pw.print("No messages :( <br>");

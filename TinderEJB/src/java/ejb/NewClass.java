@@ -15,8 +15,9 @@ public class NewClass {
     public static void main(String[] args)
     {
         
-         ArrayList<Message> messages = new NewSessionBean().getAllMessages(5);
-         for(Message message : messages)
-             System.err.println(message.getMessage());
+         new NewSessionBean().sendMessage(6, 5, "hi there");
+         //ArrayList<Message> messages = new NewSessionBean().getMessagesFromUser(5, 6);
+         //for(Message message : messages)
+             //System.err.println(message.getMessage());
     }
 }

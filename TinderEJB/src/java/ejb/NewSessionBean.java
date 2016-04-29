@@ -37,13 +37,15 @@ public class NewSessionBean implements NewSessionBeanRemote {
         String report = "Message failed";
         try {
             Statement stmt = conn.createStatement();
-            sql = "INSERT INTO message (sender, receiver, message)"
+            sql = "INSERT INTO message (sender_id, receiver_id, message)"
                     + " VALUES(" + sender + ", " + recipient + ", '" + message + "')";
+             System.out.println(sql);
             stmt.executeUpdate(sql);
             report = "Message sent!";
         } catch (Exception e) {
             //message = e.getMessage();
-            //e.printStackTrace(pw);
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         return report;
     }
@@ -66,6 +68,7 @@ public class NewSessionBean implements NewSessionBeanRemote {
             while(rs.next())
             {
                 list.add(rs.getString("username"));
+                list.add(rs.getString("account_id"));
             }
         } catch (Exception e) {
         }
@@ -105,6 +108,39 @@ public class NewSessionBean implements NewSessionBeanRemote {
         return list;
     }
     
+    @Override
+    public ArrayList<Message> getMessagesFromUser(int user1_id, int user2_id) {
+        ArrayList<Message> list = new ArrayList<>();
+        dbConnect();
+        
+        String sql = "";
+        ResultSet rs;
+        try {
+            Statement stmt = conn.createStatement();
+            //sql = "SELECT * FROM swipe WHERE user1_id = " + id;
+            sql = "SELECT message.message, account_sender.full_name AS sender, account_sender.account_id AS sender_id, account_sender.age AS sender_age, account_sender.sex AS sender_sex, " +
+"        account_receiver.full_name AS receiver, account_receiver.account_id AS receiver_id, account_receiver.age AS receiver_age, account_receiver.sex AS receiver_sex " +
+"        FROM message " +
+"        INNER JOIN account AS account_sender ON message.sender_id = account_sender.account_id AND message.sender_id = " + user2_id +
+"        OR message.sender_id = account_sender.account_id AND message.sender_id = " + user1_id  +
+"        INNER JOIN account AS account_receiver ON message.receiver_id = account_receiver.account_id AND message.receiver_id = " + user1_id +
+"        OR message.receiver_id = account_receiver.account_id AND message.receiver_id = " + user2_id +
+"        ORDER BY message_id asc";
+            rs = stmt.executeQuery(sql);
+            while(rs.next())
+            {
+                //System.out.println(rs.getString("sender") + rs.getString("receiver") + rs.getInt("sender_id") + rs.getInt("receiver_id")+ rs.getString("max(message.message)"));
+                Profile sender = new Profile(rs.getString("sender"), rs.getInt("sender_age"), rs.getString("sender_sex"), rs.getInt("sender_id"));
+                Profile receiver = new Profile(rs.getString("receiver"), rs.getInt("receiver_age"), rs.getString("receiver_sex"), rs.getInt("receiver_id"));
+                list.add(new Message(sender, receiver, rs.getString("message")));
+                //System.out.println(list.get(list.size() - 1));
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+            System.err.println("size is :" +list.size());
+        return list;
+    }
     
     private void dbConnect()
     {
@@ -120,6 +156,7 @@ public class NewSessionBean implements NewSessionBeanRemote {
               
         }
     }
+
     
     
 }

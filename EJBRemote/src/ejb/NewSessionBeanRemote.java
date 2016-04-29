@@ -22,5 +22,7 @@ public interface NewSessionBeanRemote {
     ArrayList<String> getContactList(int id);
 
     ArrayList<Message> getAllMessages(int id);
+
+    ArrayList<Message> getMessagesFromUser(int user1_id, int user2_id);
     
 }

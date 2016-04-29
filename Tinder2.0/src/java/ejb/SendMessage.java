@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,9 @@ import javax.servlet.http.HttpSession;
  * @author Shannon
  */
 public class SendMessage extends HttpServlet {
+
+    @EJB
+    private NewSessionBeanRemote newSessionBean;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -57,14 +61,16 @@ public class SendMessage extends HttpServlet {
         // obtain the values of the form data automatically URL decoded
         
         int user2 = Integer.parseInt(request.getParameter("id"));
-        
+        String message = request.getParameter("message");
+        newSessionBean.sendMessage(user2, user1, message);
         
         PrintWriter pw = response.getWriter();
         
       // set response headers before returning any message content
       response.setContentType("text/html");
+      request.getRequestDispatcher("/Message?id=" + user2).include(request, response);
       // prepare the content of the response
-      pw.println("<!DOCTYPE HTML PUBLIC " + QUOTE +
+      /*pw.println("<!DOCTYPE HTML PUBLIC " + QUOTE +
         "-//W3C//DTD HTML 4.0 Transitional//EN" + QUOTE + ">\n" +
         "<HTML>\n" + "<HEAD>\n" +
         "<TITLE>Tinder 2.0 - Register</TITLE>\n" + "</HEAD>\n" + "<BODY>\n" +
@@ -79,6 +85,7 @@ public class SendMessage extends HttpServlet {
         pw.println(
             "</div>" +
             "</BODY>\n</HTML>\n");
+      */
       pw.close();
    }
    
