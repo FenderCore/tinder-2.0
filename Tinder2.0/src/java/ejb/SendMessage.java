@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package swag;
+package ejb;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,13 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import ejb.Profile;
 
 /**
  *
  * @author Shannon
  */
-public class LoginProcessor extends HttpServlet {
+public class SendMessage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,61 +32,34 @@ public class LoginProcessor extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   private final char QUOTE = '"';
+ private final char QUOTE = '"';
    
     Connection conn;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {  
-        HttpSession session = request.getSession(true);
-        // obtain the values of the form data automatically URL decoded
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        String url= "jdbc:mysql://localhost:3306/tinder";
-        String usernameDB = "root";
-        String passwordDB = "";
         
-        String message = "";
-        String sql = "";
-        boolean success = false;
+        
+        HttpSession session = request.getSession();
+        
+        
+        String logged = (String)session.getAttribute("logged");
+        int user1 = 0;
+        if(logged == null)
+            logged = "false";
+        if(!logged.equals("true"))
+        {
+            response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", "login.jsp?"); 
+        } else 
+            user1 = (Integer)session.getAttribute("id");
+        
+        // obtain the values of the form data automatically URL decoded
+        
+        int user2 = Integer.parseInt(request.getParameter("id"));
+        
         
         PrintWriter pw = response.getWriter();
-        try {
-          Class.forName("com.mysql.jdbc.Driver");
-          conn = DriverManager.getConnection(url, usernameDB, passwordDB);
-        } catch (Exception e) {
-              //e.printStackTrace(pw);
-              message = e.getMessage();
-          }
-        ResultSet rs;
-        
-        try {
-            Statement stmt = conn.createStatement();
-            sql = "SELECT * FROM account WHERE LOWER(username) = LOWER('" + username + "')";
-            rs = stmt.executeQuery(sql);
-            if(rs.next())
-            {
-                String pass = rs.getString("password");
-                if(pass.equals(password))
-                {
-                    success = true;
-                    message = "Successfully logged in";
-                    session.setAttribute("logged", "true");
-                    session.setAttribute("username", rs.getString("username"));
-                    session.setAttribute("id", rs.getInt("account_id"));
-                    
-                    session.setAttribute("account", new Profile(rs.getString("full_name"), rs.getInt("age"), rs.getString("sex"), rs.getInt("account_id")));
-                } else {
-                    message = "Incorrect Password";
-                }
-            } else {
-                message = "Username does not exist";
-            }
-        } catch (Exception e) {
-            //message = e.getMessage();
-            //e.printStackTrace(pw);
-        }
         
       // set response headers before returning any message content
       response.setContentType("text/html");
@@ -99,14 +71,14 @@ public class LoginProcessor extends HttpServlet {
         "<link rel='stylesheet' type='text/css' href='style.css'>" +
         "<div id='container'>" +
         "<div id='header'> <img src='images/logo.png' width=1024></div>");
-        //"<jsp:include page='/navigation.html' />" +
-        //"<jsp:include page='/status.jsp' />" 
         request.getRequestDispatcher("/navigation.html").include(request, response);
         request.getRequestDispatcher("/status.jsp").include(request, response);
-        pw.println("<div id='main'>" +
-        "<P>"+ message + "</p>" +
-        "</div>" +
-        "</BODY>\n</HTML>\n");
+        pw.println("<div id='main'>" );
+        
+        
+        pw.println(
+            "</div>" +
+            "</BODY>\n</HTML>\n");
       pw.close();
    }
    

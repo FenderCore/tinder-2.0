@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tinder;
+package ejb;
+
+import java.io.Serializable;
 
 /**
  *
  * @author Shannon
  */
-public class Profile 
+public class Profile  implements Serializable
 {
     private String name;
     private int age;

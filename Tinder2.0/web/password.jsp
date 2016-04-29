@@ -15,7 +15,7 @@
     </head>
     <body>
         <div id="container">
-        <div id="header"><img src="images/logo.jpg" width=1024></div>
+        <div id="header"><img src="images/logo.png" width=1024></div>
         <% 
             String logged = (String)session.getAttribute("logged");
             int user1 = 0;

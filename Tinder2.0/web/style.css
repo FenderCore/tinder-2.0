@@ -19,11 +19,21 @@ and open the template in the editor.
     height: 200px;
     margin-left: auto;
     margin-right: auto;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+}
+
+#headerimage {
+    
 }
 
 
 body, html {
     background-color: #598e25;
+    background-color: black;
+    background-image: url("images/back.jpg");
+    background-repeat: repeat-x;
+    background-size: 100%;
     min-height:100%; 
 	height:100%;
 	margin: 0;
@@ -49,13 +59,15 @@ color:white;
     width: 1024px;
     margin-left: auto;
     margin-right: auto;
-	background-color: orange;
+	background-color: rgba(245, 245, 220, 0.75);
 	color:black;
 	font: 15px arial, sans-serif;
     min-height:100%;
 	position:relative;
 	padding-bottom:8px;
         padding-top: 0;
+        border-top-right-radius: 25px;
+        border-top-left-radius: 25px;
 }
 
 #main {
@@ -66,7 +78,7 @@ color:white;
 	padding-bottom: 0px;
 	position:relative;
 	overflow:hidden;
-	background-color:inherit;
+	background-color: rgba(0,0,0,0);
 	border-color:blue;
 }
 
@@ -74,14 +86,19 @@ color:white;
     margin-top: 0;
     height: 30px;
     background-color: rgb(1, 128, 200);
+    background-color: rgb(202, 143, 66);
     white-space: nowrap;
     text-align: center;
 	vertical-align: middle;
 	overflow:hidden;
-    border-color:rgb(0, 0, 0);
+    border-color: grey;
 	border-left-style: solid;
 	border-right-style: solid;
 	border-width: 1px;
+        
+        
+        border-bottom-right-radius: 1px;
+        border-bottom-left-radius: 2px;
 
 }
 
@@ -92,7 +109,7 @@ color:white;
     width:20%;
     white-space: normal;
     text-align: center;
-    border-right-color:rgb(0, 0, 0);
+    border-right-color:grey;
 	border-right-style: solid;
 	border-right-width: 1px;
 	vertical-align:middle;

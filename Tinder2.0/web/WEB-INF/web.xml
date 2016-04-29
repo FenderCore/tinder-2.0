@@ -48,6 +48,22 @@
         <servlet-name>ChangePassword</servlet-name>
         <servlet-class>swag.ChangePassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UseBean</servlet-name>
+        <servlet-class>ejb.UseBean</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MessageUser</servlet-name>
+        <servlet-class>ejb.MessageUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Messages</servlet-name>
+        <servlet-class>ejb.Messages</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendMessage</servlet-name>
+        <servlet-class>ejb.SendMessage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomerServlet</servlet-name>
         <url-pattern>/CustomerServlet</url-pattern>
@@ -96,9 +112,25 @@
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UseBean</servlet-name>
+        <url-pattern>/UseBean</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MessageUser</servlet-name>
+        <url-pattern>/Message</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Messages</servlet-name>
+        <url-pattern>/Messages</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendMessage</servlet-name>
+        <url-pattern>/SendMessage</url-pattern>
+    </servlet-mapping>
     <session-config>
-      <session-timeout>-1</session-timeout> 
-   </session-config>
+        <session-timeout>-1</session-timeout>
+    </session-config>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

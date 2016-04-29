@@ -8,18 +8,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Tinder 2.0</title>
+        <title>Tinder 2.0 - Home</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div id="container">
-        <div id="header"><img src="images/logo.jpg" width=1024></div>
+        <div id="header"><img id="headerimage" src="images/logo.png" width=1024></div>
         <jsp:include page="navigation.html" />
         <jsp:include page="status.jsp" />
         <div id="main">
             Welcome to Tinder 2.0
+            
+        <form action="UseBean" method="post">
+            <input type="text" name="nm">
+            <input type="submit" value="OK">
+        </form>
             <div style="margin-right: 50px;"><img src="images/ugly.png" style="float: right; animation: blink 2s; animation-iteration-count: infinite;"/></div>
             <br>&nbsp;&nbsp;<div><img src="images/derm.jpg" style=""/></div>
             <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/pc.png" style=""/>
