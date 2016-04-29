@@ -19,12 +19,9 @@
         <jsp:include page="navigation.html" />
         <jsp:include page="status.jsp" />
         <div id="main">
-            Welcome to Tinder 2.0
+            Welcome to Tinder 2.0 <br>
+            The greatest AUT dating site you will ever use!
             
-        <form action="UseBean" method="post">
-            <input type="text" name="nm">
-            <input type="submit" value="OK">
-        </form>
             <div style="margin-right: 50px;"><img src="images/ugly.png" style="float: right; animation: blink 2s; animation-iteration-count: infinite;"/></div>
             <br>&nbsp;&nbsp;<div><img src="images/derm.jpg" style=""/></div>
             <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/pc.png" style=""/>

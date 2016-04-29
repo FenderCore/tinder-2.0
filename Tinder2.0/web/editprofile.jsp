@@ -4,7 +4,7 @@
     Author     : Shannon
 --%>
 
-<%@page import="tinder.Profile"%>
+<%@page import="ejb.Profile"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -95,7 +95,7 @@ public class LoginProcessor extends HttpServlet {
       pw.println("<!DOCTYPE HTML PUBLIC " + QUOTE +
         "-//W3C//DTD HTML 4.0 Transitional//EN" + QUOTE + ">\n" +
         "<HTML>\n" + "<HEAD>\n" +
-        "<TITLE>Tinder 2.0 - Register</TITLE>\n" + "</HEAD>\n" + "<BODY>\n" +
+        "<TITLE>Tinder 2.0 - Logged In</TITLE>\n" + "</HEAD>\n" + "<BODY>\n" +
         "<link rel='stylesheet' type='text/css' href='style.css'>" +
         "<div id='container'>" +
         "<div id='header'> <img src='images/logo.png' width=1024></div>");

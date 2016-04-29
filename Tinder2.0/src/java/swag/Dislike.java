@@ -44,17 +44,18 @@ public class Dislike extends HttpServlet {
         
         
         String logged = (String)session.getAttribute("logged");
+        int user1 = 0;
         if(logged == null)
             logged = "false";
         if(!logged.equals("true"))
         {
             response.setStatus(response.SC_MOVED_TEMPORARILY);
             response.setHeader("Location", "login.jsp?"); 
-        }
+        } else 
+            user1 = (Integer)session.getAttribute("id");
         
         // obtain the values of the form data automatically URL decoded
         int user2 = Integer.parseInt(request.getParameter("id"));
-        int user1 = (Integer)session.getAttribute("id");
         
         String url= "jdbc:mysql://localhost:3306/tinder";
         String usernameDB = "root";
@@ -109,7 +110,7 @@ public class Dislike extends HttpServlet {
       pw.println("<!DOCTYPE HTML PUBLIC " + QUOTE +
         "-//W3C//DTD HTML 4.0 Transitional//EN" + QUOTE + ">\n" +
         "<HTML>\n" + "<HEAD>\n" +
-        "<TITLE>Tinder 2.0 - Register</TITLE>\n" + "</HEAD>\n" + "<BODY>\n" +
+        "<TITLE>Tinder 2.0 - User Disliked</TITLE>\n" + "</HEAD>\n" + "<BODY>\n" +
         "<link rel='stylesheet' type='text/css' href='style.css'>" +
         "<div id='container'>" +
         "<div id='header'> <img src='images/logo.png' width=1024></div>");
@@ -118,7 +119,7 @@ public class Dislike extends HttpServlet {
         request.getRequestDispatcher("/navigation.html").include(request, response);
         request.getRequestDispatcher("/status.jsp").include(request, response);
         pw.println("<div id='main'>" );
-        pw.print("Profile liked!");
+        pw.print("Profile diliked!");
         
         pw.println(
             "</div>" +
